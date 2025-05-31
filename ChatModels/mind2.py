@@ -18,7 +18,8 @@ from datetime import datetime
 
 try:
     llm = HuggingFaceEndpoint(
-        repo_id="HuggingFaceH4/zephyr-7b-beta",
+        # repo_id="HuggingFaceH4/zephyr-7b-beta",
+        repo_id="mistralai/Mistral-7B-Instruct-v0.1",
         task="text-generation",
         temperature=0.1,
         max_new_tokens=512,
