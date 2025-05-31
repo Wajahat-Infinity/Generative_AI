@@ -6,15 +6,28 @@ import random
 from datetime import datetime
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
 
 # Initialize Hugging Face chat model
-llm = HuggingFaceEndpoint(
-    repo_id="HuggingFaceH4/zephyr-7b-beta",
-    task="text-generation",
-    temperature=0.1,
-    max_new_tokens=512
-)
+# llm = HuggingFaceEndpoint(
+#     repo_id="HuggingFaceH4/zephyr-7b-beta",
+#     task="text-generation",
+#     temperature=0.1,
+#     max_new_tokens=512
+# )
+
+try:
+    llm = HuggingFaceEndpoint(
+        repo_id="HuggingFaceH4/zephyr-7b-beta",
+        task="text-generation",
+        temperature=0.1,
+        max_new_tokens=512,
+        huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    )
+except KeyError:
+    st.error("API key not found. Please check your Streamlit Secrets configuration.")
+    st.stop()
+    
 model = ChatHuggingFace(llm=llm)
 
 # Generate synthetic user profiles
